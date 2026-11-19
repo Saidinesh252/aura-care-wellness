@@ -1,0 +1,135 @@
+.sticky-context-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px var(--gutter, 24px);
+  background: rgba(250, 250, 250, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  transition: all 0.2s ease;
+}
+
+.sticky-context-bar::-webkit-scrollbar {
+  display: none;
+}
+
+:root[data-theme="dark"] .sticky-context-bar {
+  background: rgba(11, 15, 23, 0.88);
+  border-bottom-color: #1e293b;
+}
+
+.context-pills-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.context-bar-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 650;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.context-bar-pill:hover {
+  background: var(--surface-tint);
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+:root[data-theme="dark"] .context-bar-pill:hover {
+  border-color: #334155;
+}
+
+.context-bar-pill .pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.context-bar-pill.pill-environment {
+  border-color: #93c5fd;
+  color: #1e40af;
+  background: rgba(239, 246, 255, 0.8);
+}
+:root[data-theme="dark"] .context-bar-pill.pill-environment {
+  border-color: #1e3a8a;
+  color: #93c5fd;
+  background: rgba(30, 58, 138, 0.2);
+}
+
+.context-bar-pill.pill-budget {
+  border-color: #fed7aa;
+  color: #9a3412;
+  background: rgba(255, 247, 237, 0.8);
+}
+:root[data-theme="dark"] .context-bar-pill.pill-budget {
+  border-color: #7c2d12;
+  color: #fdba74;
+  background: rgba(124, 45, 18, 0.2);
+}
+
+.context-bar-pill.pill-weather {
+  border-color: #a7f3d0;
+  color: #065f46;
+  background: rgba(236, 253, 245, 0.8);
+}
+:root[data-theme="dark"] .context-bar-pill.pill-weather {
+  border-color: #065f46;
+  color: #6ee7b7;
+  background: rgba(6, 78, 59, 0.2);
+}
+
+.context-bar-pill.pill-profile {
+  border-color: #ddd6fe;
+  color: #5b21b6;
+  background: rgba(245, 243, 255, 0.8);
+}
+:root[data-theme="dark"] .context-bar-pill.pill-profile {
+  border-color: #4c1d95;
+  color: #c4b5fd;
+  background: rgba(76, 29, 149, 0.2);
+}
+
+.context-bar-pill.pill-comfort {
+  background: #fef08a;
+  border-color: #facc15;
+  color: #713f12;
+  font-weight: 700;
+}
+:root[data-theme="dark"] .context-bar-pill.pill-comfort {
+  background: #713f12;
+  border-color: #ca8a04;
+  color: #fef08a;
+}
+
+.context-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .sticky-context-bar {
+    padding: 6px 14px;
+    top: 54px;
+  }
+}

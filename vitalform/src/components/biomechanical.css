@@ -1,0 +1,532 @@
+.biomechanical-exercise-container {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.bio-stage-wrapper {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #f0f7ff 0%, #e2eefb 100%);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+:root[data-theme="dark"] .bio-stage-wrapper {
+  background: linear-gradient(180deg, #0e1726 0%, #080d16 100%);
+  border-color: #1e293b;
+}
+
+.bio-stage-wrapper.mistake-mode {
+  border-color: #e65266;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25), 0 4px 14px rgba(239, 68, 68, 0.15);
+}
+
+.bio-stage-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 190px;
+}
+
+/* Dual-Tone Anatomical Vector Mannequin */
+/* Right / Near Limbs: Vivid Cobalt & Cyan */
+.limb-near-upper {
+  stroke: #2563eb;
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+.limb-near-lower {
+  stroke: #0284c7;
+  stroke-width: 8.5;
+  stroke-linecap: round;
+}
+.limb-near-foot {
+  stroke: #0284c7;
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+.limb-near-hinge {
+  fill: #38bdf8;
+  stroke: #0369a1;
+  stroke-width: 1.5;
+}
+
+/* Left / Far Limbs: Vivid Violet & Purple */
+.limb-far-upper {
+  stroke: #7c3aed;
+  stroke-width: 9;
+  stroke-linecap: round;
+  opacity: 0.9;
+}
+.limb-far-lower {
+  stroke: #9333ea;
+  stroke-width: 7.5;
+  stroke-linecap: round;
+  opacity: 0.9;
+}
+.limb-far-foot {
+  stroke: #9333ea;
+  stroke-width: 6.5;
+  stroke-linecap: round;
+  opacity: 0.9;
+}
+.limb-far-hinge {
+  fill: #c084fc;
+  stroke: #6b21a8;
+  stroke-width: 1.5;
+}
+
+/* Legs need thicker mass */
+.exercise-leg .limb-near-upper { stroke-width: 12.5; }
+.exercise-leg .limb-near-lower { stroke-width: 10.5; }
+.exercise-leg .limb-far-upper { stroke-width: 11.5; }
+.exercise-leg .limb-far-lower { stroke-width: 9.5; }
+
+/* Torso & Head */
+.bio-torso-core {
+  stroke: #1e40af;
+  stroke-width: 24;
+  stroke-linecap: round;
+}
+
+:root[data-theme="dark"] .bio-torso-core {
+  stroke: #3b82f6;
+}
+
+.bio-head-sphere {
+  fill: #60a5fa;
+  stroke: #1d4ed8;
+  stroke-width: 2;
+}
+
+/* Dynamic Anatomical Spine Alignment Line */
+.bio-spine-line {
+  fill: none;
+  stroke: #10b981;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-dasharray: 4 2;
+  filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.5));
+  transition: stroke 0.3s ease;
+}
+
+.bio-spine-line.spine-mistake {
+  stroke: #ef4444;
+  stroke-width: 4;
+  stroke-dasharray: 6 3;
+  filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.7));
+}
+
+.bio-vertebra-dot {
+  fill: #10b981;
+}
+.bio-vertebra-dot.vertebra-mistake {
+  fill: #ef4444;
+}
+
+/* Joint Pivot Dots */
+.bio-joint-dot {
+  fill: #ffffff;
+  stroke: #2563eb;
+  stroke-width: 2;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+}
+
+.bio-joint-dot.far {
+  stroke: #7c3aed;
+}
+
+.bio-joint-dot.fault-active {
+  stroke: #ef4444;
+  fill: #fee2e2;
+  r: 5.5;
+}
+
+/* Ground Reference Datum Line */
+.bio-ground-line {
+  stroke: #64748b;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.bio-ground-hash {
+  stroke: #94a3b8;
+  stroke-width: 1;
+}
+
+.bio-heel-contact {
+  fill: #10b981;
+  stroke: #ffffff;
+  stroke-width: 1.5;
+}
+
+.bio-motion-arc {
+  fill: none;
+  stroke: #0284c7;
+  stroke-width: 2;
+  stroke-dasharray: 1 4;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+
+.bio-motion-arc.left { stroke: #9333ea; }
+.bio-wall-plane { fill: #aec8e42a; stroke: #879bb8; stroke-dasharray: 4 4; }
+.bio-angle-arc { fill: none; stroke: #08714f; stroke-width: 2.5; }
+.bio-angle-arc.is-fault { stroke: #be123c; }
+:root[data-theme="dark"] .bio-angle-arc { stroke: #6ee7b7; }
+:root[data-theme="dark"] .bio-angle-arc.is-fault { stroke: #fda4af; }
+
+/* Angle HUD Badge in SVG */
+.bio-angle-text {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  fill: #065f46;
+}
+
+:root[data-theme="dark"] .bio-angle-text {
+  fill: #34d399;
+}
+
+.bio-angle-text.fault {
+  fill: #b91c1c;
+}
+
+:root[data-theme="dark"] .bio-angle-text.fault {
+  fill: #f87171;
+}
+
+/* Top Overlays on Stage */
+.bio-stage-badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.bio-stage-badges svg,
+.bio-hud-chip svg {
+  width: 14px !important;
+  height: 14px !important;
+  min-height: 14px !important;
+  max-width: 14px !important;
+  max-height: 14px !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+}
+
+.bio-hud-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+:root[data-theme="dark"] .bio-hud-chip {
+  background: rgba(6, 78, 59, 0.85);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #a7f3d0;
+}
+
+.bio-hud-chip.green-zone {
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #10b981;
+  background: rgba(240, 253, 244, 0.95);
+}
+
+:root[data-theme="dark"] .bio-hud-chip.green-zone {
+  background: rgba(2, 44, 34, 0.88);
+  color: #6ee7b7;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.bio-hud-chip.red-warning {
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #ef4444;
+  background: rgba(254, 242, 242, 0.95);
+}
+
+:root[data-theme="dark"] .bio-hud-chip.red-warning {
+  background: rgba(69, 10, 10, 0.88);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+:root[data-theme="dark"] .bio-hud-chip.red-warning {
+  background: rgba(50, 15, 15, 0.9);
+  color: #fca5a5;
+  border-color: #991b1b;
+}
+
+.bio-stage-caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px 8px;
+  color: #375580;
+  font-size: 11px;
+}
+
+:root[data-theme="dark"] .bio-stage-caption { color: #baccec; }
+
+.bio-limb-legend {
+  display: flex;
+  gap: 6px;
+}
+
+.bio-legend-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+:root[data-theme="dark"] .bio-legend-pill {
+  background: rgba(15, 23, 42, 0.85);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.bio-legend-pill .dot-near {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2563eb;
+}
+
+.bio-legend-pill .dot-far {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #7c3aed;
+}
+
+/* Control Bar */
+.bio-controls-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.bio-control-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.bio-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 32px;
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-weight: 650;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  transition: all 0.15s ease;
+}
+
+.bio-toggle-btn:hover {
+  background: var(--surface-tint);
+}
+
+.bio-toggle-btn[aria-pressed="true"] {
+  background: #dbeafe;
+  border-color: #93c5fd;
+  color: #1d4ed8;
+}
+
+:root[data-theme="dark"] .bio-toggle-btn[aria-pressed="true"] {
+  background: #1e3a8a;
+  border-color: #3b82f6;
+  color: #93c5fd;
+}
+
+.bio-toggle-btn.mistake-toggle[aria-pressed="true"] {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #b91c1c;
+}
+
+:root[data-theme="dark"] .bio-toggle-btn.mistake-toggle[aria-pressed="true"] {
+  background: #450a0a;
+  border-color: #ef4444;
+  color: #fca5a5;
+}
+
+/* Synchronized Tempo & Breathing Phase Bar */
+.bio-tempo-panel {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.bio-tempo-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px 10px;
+  font-size: 11.5px;
+}
+
+.bio-phase-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+:root[data-theme="dark"] .bio-phase-pill {
+  background: #172554;
+  color: #93c5fd;
+  border-color: #1e40af;
+}
+
+.bio-phase-pill.hold-phase {
+  background: #fefce8;
+  color: #a16207;
+  border-color: #fef08a;
+}
+
+:root[data-theme="dark"] .bio-phase-pill.hold-phase {
+  background: #422006;
+  color: #fde047;
+  border-color: #854d0e;
+}
+
+.bio-phase-pill.concentric-phase {
+  background: #f0fdf4;
+  color: #15803d;
+  border-color: #bbf7d0;
+}
+
+:root[data-theme="dark"] .bio-phase-pill.concentric-phase {
+  background: #052e16;
+  color: #86efac;
+  border-color: #166534;
+}
+
+.bio-tempo-track {
+  height: 6px;
+  background: var(--surface-tint);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--border);
+}
+
+.bio-tempo-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6 0%, #10b981 100%);
+  border-radius: 999px;
+  transform-origin: left center;
+}
+
+:root[data-comfort="true"] .bio-controls-bar button { min-height: 44px; font-size: 13px; }
+:root[data-comfort="true"] .bio-stage-caption,
+:root[data-comfort="true"] .bio-tempo-header,
+:root[data-comfort="true"] .bio-mistake-card { font-size: 14px; }
+
+/* Biomechanical Form & Injury Prevention Callout */
+.bio-mistake-card {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+:root[data-theme="dark"] .bio-mistake-card {
+  background: #200d11;
+  border-color: #4c111a;
+  color: #ffe4e6;
+}
+
+.bio-mistake-card h4 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #be123c;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.bio-mistake-card p { margin: 0; }
+
+:root[data-theme="dark"] .bio-mistake-card h4 {
+  color: #fb7185;
+}
+
+.bio-mistake-grid {
+  display: grid;
+  gap: 6px;
+}
+
+.bio-mistake-row {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  align-items: start;
+  gap: 6px;
+}
+
+.bio-mistake-row strong {
+  color: var(--text);
+}
+
+.bio-risk-note {
+  margin-top: 4px;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 6px;
+  font-size: 11px;
+  color: #881337;
+  border-left: 3px solid #e11d48;
+}
+
+:root[data-theme="dark"] .bio-risk-note {
+  background: rgba(0, 0, 0, 0.3);
+  color: #fecdd3;
+  border-left-color: #fb7185;
+}

@@ -1,0 +1,139 @@
+.family-circle { position: relative; flex: none; }
+.family-circle-trigger { display: flex; align-items: center; gap: 7px; min-height: 35px; max-width: 172px; padding: 0 10px; color: var(--green-dark); background: var(--green-soft); border: 1px solid var(--border); border-radius: 8px; font-weight: 700; font-size: 12px; white-space: nowrap; }
+.family-circle-trigger:hover { border-color: var(--green); }
+.family-circle-trigger span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.family-circle-trigger svg { flex: none; }
+.family-circle-panel { position: absolute; z-index: 10; right: 0; top: calc(100% + 9px); width: min(280px, calc(100vw - 26px)); padding: 11px; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 15px; box-shadow: 0 11px 33px #122f272c; }
+.family-circle-panel > strong { display: block; padding: 3px 5px 9px; }
+.family-circle-options { display: grid; gap: 3px; max-height: min(43vh, 265px); padding: 3px; overflow: auto; }
+.family-circle-panel button { min-height: 44px; text-align: left; width: 100%; border-radius: 9px; }
+.family-circle-options button { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px; padding: 6px; }
+.family-circle-options button:hover, .family-circle-options button[aria-pressed="true"] { color: var(--green-dark); background: var(--green-soft); }
+.family-circle-options button > span:nth-child(2) { min-width: 0; overflow-wrap: anywhere; font-weight: 670; }
+.family-circle-options small { display: block; font-size: 11px; font-weight: 500; color: var(--muted); }
+.family-circle-panel .family-circle-hub { display: flex; align-items: center; justify-content: space-between; margin-top: 7px; padding: 0 7px; border-top: 1px solid var(--border); border-radius: 0; font-weight: 720; }
+.family-circle-hub:hover { color: var(--green); }
+.family-avatar { flex: none; display: grid; place-items: center; width: 35px; height: 35px; background: var(--green-soft); color: var(--green-dark); border: 1px solid var(--border); border-radius: 11px; font-size: 13px; font-weight: 790; }
+
+.family-hub { --family-blue: #1d4ed8; --family-ice: #eff6ff; --family-ice-line: #c4d8f9; --family-hero-fill: linear-gradient(112deg, #eff6ff 10%, #eef8f6 100%); }
+:root[data-theme="dark"] .family-hub { --family-blue: #abc7ff; --family-ice: #172944; --family-ice-line: #31476c; --family-hero-fill: linear-gradient(112deg, #172944, #142d2d); }
+.family-hero { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: clamp(18px, 3.5vw, 32px); border: 1px solid var(--family-ice-line); border-radius: 20px; background: var(--family-hero-fill); }
+.family-hero-icon { display: inline-grid; place-items: center; width: 43px; height: 43px; color: var(--family-blue); background: var(--surface); border: 1px solid var(--family-ice-line); border-radius: 13px; margin-bottom: 10px; }
+.family-hero h1 { font-size: clamp(26px, 4.5vw, 41px); line-height: 1.08; letter-spacing: -.054em; font-weight: 810; }
+.family-hero p { color: var(--muted); font-size: 14px; line-height: 1.5; margin-top: 8px; }
+.family-hero-tools { display: grid; gap: 8px; min-width: max-content; }
+.family-hero-active { display: flex; align-items: center; gap: 9px; padding: 9px 11px; background: var(--surface); border: 1px solid var(--border); border-radius: 11px; }
+.family-hero-active > div { min-width: 0; max-width: 180px; }
+.family-hero-active :is(small, strong, div > span) { display: block; overflow-wrap: anywhere; }
+.family-hero-active small, .family-hero-active div > span { font-size: 11px; color: var(--muted); }
+.family-hero-active strong { line-height: 1.3; }
+.family-hub .button { min-height: 44px; font-size: 12px; }
+.family-section { margin-top: 23px; }
+.family-section > .section-head { align-items: center; }
+.family-section .section-head h2 svg { flex: none; }
+.family-hub .section-head p { font-size: 13px; line-height: 1.45; }
+.family-member-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: 8px; }
+.family-member-card { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px; min-height: 58px; padding: 8px; text-align: left; }
+.family-member-card:hover, .family-member-card[aria-pressed="true"] { border-color: var(--green); }
+.family-member-card[aria-pressed="true"] { background: var(--green-soft); color: var(--green-dark); }
+.family-member-card strong, .family-member-card small { display: block; overflow-wrap: anywhere; line-height: 1.32; }
+.family-member-card small { color: var(--muted); font-size: 11px; margin-top: 3px; }
+.family-member-add { border-style: dashed; padding: 8px 10px; }
+.family-member-add span { display: flex; align-items: center; gap: 6px; font-weight: 710; }
+.family-display { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; margin-top: 9px; padding: 10px; }
+.family-display > div { margin-right: auto; }
+.family-display p { color: var(--muted); font-size: 12px; }
+.family-display .select-field { min-width: 152px; }
+.family-display .select-field select { font-size: 12px; }
+.family-action-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+.family-log { display: flex; flex-direction: column; gap: 10px; padding: clamp(10px, 1.5vw, 17px); }
+.family-log-heading, .family-action-row { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.family-tile-icon { display: grid; place-items: center; width: 39px; height: 39px; flex: none; border: 1px solid var(--family-ice-line); border-radius: 10px; color: var(--family-blue); background: var(--family-ice); }
+.feelings-log .family-tile-icon, .family-meal-heading .family-tile-icon { color: var(--green-dark); background: var(--green-soft); border-color: var(--border); }
+.family-log h3, .family-mobility h3, .family-meal-card h3 { font-size: 16px; letter-spacing: -.025em; font-weight: 780; }
+.family-log .family-number { color: var(--text); font-size: clamp(24px, 3vw, 34px); font-weight: 790; letter-spacing: -.045em; line-height: 1; }
+.family-number > span { font-size: 12px; font-weight: 560; color: var(--muted); letter-spacing: 0; white-space: nowrap; }
+.family-log .family-action-row { margin-top: auto; }
+.family-action-row .button { padding: 0 9px; }
+.family-feelings { display: grid; gap: 7px; }
+.family-feelings label { display: grid; gap: 4px; }
+.family-feelings label > span:first-child { color: var(--muted); font-size: 12px; font-weight: 620; }
+.family-mobility { display: flex; align-items: center; gap: 10px; margin-top: 9px; padding: 11px; background: var(--family-ice); border-color: var(--family-ice-line); }
+.family-mobility .family-tile-icon { background: var(--surface); }
+.family-mobility p, .family-empty p { font-size: 12px; color: var(--muted); margin-top: 3px; }
+.family-mobility .button { margin-left: auto; flex: none; }
+.family-reminders, .family-week { padding: clamp(11px, 1.8vw, 19px); }
+.family-reminder-list { display: grid; gap: 6px; }
+.family-reminder-row { display: flex; align-items: center; gap: 6px; }
+.family-reminder-row > .icon-button { min-width: 44px; min-height: 44px; }
+.family-reminder-check { display: flex; flex: 1; align-items: center; gap: 8px; min-height: 48px; padding: 6px 9px; text-align: left; background: var(--surface-tint); border: 1px solid var(--border); border-radius: 9px; }
+.family-reminder-check[aria-pressed="true"] { background: var(--green-soft); color: var(--green-dark); }
+.family-reminder-check > span:first-child { display: grid; place-items: center; flex: none; height: 22px; width: 22px; border-radius: 6px; border: 1px solid var(--subtle); color: var(--green-dark); }
+.family-reminder-check strong, .family-reminder-check small { display: block; overflow-wrap: anywhere; }
+.family-reminder-check small { color: var(--muted); font-size: 11px; margin-top: 2px; }
+.family-note { margin-top: 8px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.family-note a { color: var(--green-dark); text-decoration: underline; text-underline-offset: 2px; }
+.family-form-layout, .family-form { display: grid; gap: 11px; }
+.family-form-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.family-form :is(input, .select-field) { min-height: 44px; }
+.family-form .form-field > span:first-child { font-size: 13px; }
+.family-form .select-field select { font-size: 13px; }
+.family-table-scroll { overflow-x: auto; outline-offset: 4px; }
+.family-table-scroll:focus-visible { outline: 2px solid var(--green); }
+.family-table-scroll table { width: 100%; min-width: 525px; border-collapse: collapse; text-align: left; font-size: 12px; }
+.family-table-scroll :is(th, td) { padding: 8px 6px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+.family-table-scroll thead { color: var(--muted); }
+.family-week-today { background: var(--green-soft); color: var(--green-dark); }
+.family-meal-filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.family-meal-filters .button[aria-pressed="true"] { color: var(--green-dark); background: var(--green-soft); border-color: var(--green); }
+.family-meal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 245px), 1fr)); gap: 9px; align-items: start; margin-top: 10px; }
+.family-meal-card { padding: 12px; }
+.family-meal-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px; }
+.family-meal-heading p { display: flex; gap: 4px; align-items: center; font-size: 11px; color: var(--muted); }
+.family-meal-macros { color: var(--muted); font-size: 12px; margin-top: 4px; }
+.family-meal-tags { display: flex; gap: 4px; flex-wrap: wrap; margin: 8px 0; }
+.family-meal-tags li { color: var(--green-dark); background: var(--green-soft); border-radius: 9px; padding: 2px 6px; font-size: 10.5px; font-weight: 640; }
+.family-recipe { border-top: 1px solid var(--border); margin-top: 8px; }
+.family-recipe summary { display: flex; align-items: center; justify-content: space-between; gap: 5px; min-height: 44px; cursor: pointer; font-size: 12px; font-weight: 680; }
+.family-recipe[open] summary svg { transform: rotate(180deg); }
+.family-recipe > ul { list-style: disc; padding-left: 19px; margin-bottom: 8px; }
+.family-recipe > p { line-height: 1.5; }
+.family-empty { margin-top: 10px; padding: 13px; }
+.family-empty h3 { font-weight: 780; }
+.family-empty .button { margin-top: 7px; }
+.family-recipe .family-action-row { margin-top: 9px; }
+.family-privacy { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; margin-top: 16px; }
+.family-privacy svg { flex: none; color: var(--green); }
+.read-aloud { max-width: 100%; }
+.read-aloud .button { white-space: normal; }
+.read-aloud-status { margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.45; max-width: 315px; }
+:root[data-comfort="true"] .family-hub :is(.button, .family-note, .family-recipe summary, .family-display p, .family-meal-macros, .family-log-heading h3) { font-size: 15px; }
+:root[data-comfort="true"] .family-hub :is(.family-member-card small, .family-reminder-check small, .family-meal-tags li, .family-feelings label > span:first-child) { font-size: 13px; }
+:root[data-comfort="true"] .family-hub .family-table-scroll table { font-size: 14px; }
+:root[data-comfort="true"] .family-hub .family-tile-icon { border-color: var(--family-blue); }
+
+@media (max-width: 1010px) {
+  .family-circle-trigger > span { max-width: 72px; }
+  .family-circle-chevron { display: none; }
+  .family-action-grid { grid-template-columns: 1fr 1fr; }
+  .family-log.feelings-log { grid-column: 1 / -1; }
+  .family-feelings { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  .family-circle-trigger { min-width: 35px; padding: 0 8px; }
+  .family-circle-trigger > span { max-width: 65px; }
+  .family-circle-panel { position: fixed; inset-inline: 13px; top: calc(var(--header) + 3px); width: auto; }
+}
+@media (max-width: 525px) {
+  .family-circle-trigger { justify-content: center; }
+  .family-circle-trigger > span { display: none; }
+  .family-hero { align-items: stretch; flex-direction: column; }
+  .family-hero-tools { min-width: 0; grid-template-columns: 1fr; }
+  .family-hero-active > div { max-width: none; }
+  .family-action-grid, .family-feelings { grid-template-columns: 1fr; }
+  .family-mobility { align-items: flex-start; flex-wrap: wrap; }
+  .family-mobility > div { flex: 1 1 calc(100% - 50px); }
+  .family-mobility .button { width: 100%; margin-left: 0; }
+  .family-hub .section-head { align-items: flex-start; flex-wrap: wrap; }
+  .family-hub .section-head > .button { max-width: none; }
+}

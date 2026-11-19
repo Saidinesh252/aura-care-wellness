@@ -1,0 +1,12 @@
+{
+  "name": "aura-care-root",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm --prefix vitalform run dev",
+    "build": "npm --prefix vitalform run build",
+    "typecheck": "npm --prefix vitalform run typecheck",
+    "preview": "npm --prefix vitalform run preview"
+  }
+}

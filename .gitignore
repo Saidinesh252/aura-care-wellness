@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+.npm-cache/
+
+# Production build outputs
+dist/
+dist-ssr/
+build/
+.next/
+*.tsbuildinfo
+
+# Local Environment Variables & Secrets
+.env
+.env.*
+!.env.example
+.env.local
+.env.*.local
+*.local
+
+# Editor & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

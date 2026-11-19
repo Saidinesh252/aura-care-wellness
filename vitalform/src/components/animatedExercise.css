@@ -1,0 +1,61 @@
+.animated-exercise { display: grid; gap: 9px; min-width: 0; }
+.exercise-stage { position: relative; overflow: hidden; border: 1px solid #bfdbfe; border-radius: 14px; background: #eff6ff; }
+.exercise-stage > svg.bio-stage-svg { display: block; width: 100%; height: auto; min-height: 170px; }
+.exercise-halo { fill: #dbeafe75; stroke: #bfdbfe; stroke-width: 1; }
+.exercise-halo-inner { fill: #eff6ffbb; }
+.exercise-shadow { fill: #c9d9ef; opacity: .67; }
+.exercise-limb line, .exercise-torso { stroke-linecap: round; }
+.exercise-torso { stroke: #2563eb; stroke-width: 25; }
+.exercise-limb-far { --upper: #75a6f6; --lower: #528cec; --hinge: #6698f2; }
+.exercise-limb-near { --upper: #3b82f6; --lower: #1d4ed8; --hinge: #3b82f6; }
+.exercise-limb-upper { stroke: var(--upper); stroke-width: 10; }
+.exercise-limb-lower { stroke: var(--lower); stroke-width: 8.5; }
+.exercise-leg .exercise-limb-upper { stroke-width: 12; }
+.exercise-leg .exercise-limb-lower { stroke-width: 10; }
+.exercise-foot { stroke: var(--lower); stroke-width: 7.5; }
+.exercise-hinge { fill: var(--hinge); }
+.exercise-head { fill: #75a6f6; stroke: #3b82f6; stroke-width: 1.35; }
+.exercise-equipment, .exercise-mat, .exercise-accessory, .exercise-guide, .exercise-guide-arrow { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.exercise-equipment { stroke: #879bb8; stroke-width: 5; }
+.exercise-mat { stroke: #a8c4eb; stroke-width: 6; opacity: .84; }
+.exercise-accessory { stroke: #2563eb; stroke-width: 2.5; }
+.exercise-weight { fill: #264a83; }
+.exercise-guide { stroke: #5680b6; stroke-width: 1.7; }
+.exercise-guide-dashed { stroke-dasharray: 4 4; opacity: .8; }
+.exercise-guide-arrow { stroke: #5680b6; stroke-width: 1.6; }
+.exercise-focus-points circle { fill: #3b82f63d; stroke: #174bbc; stroke-width: 1.3; transform-box: fill-box; transform-origin: center; }
+.exercise-stage[data-playing="true"] .exercise-focus-points circle { animation: exercise-pulse 1.7s ease-in-out infinite; }
+@keyframes exercise-pulse { 50% { transform: scale(1.3); opacity: .49; } }
+.exercise-stage-step { position: absolute; left: 8px; bottom: 7px; border: 1px solid #c4d7f2; background: #f8fbffde; color: #294a7a; border-radius: 6px; padding: 2px 5px; font-weight: 700; font-size: 10px; }
+.exercise-stage-controls { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+.exercise-speed { display: inline-flex; background: var(--surface-tint); border: 1px solid var(--border); border-radius: 9px; padding: 3px; gap: 2px; }
+.exercise-speed button, .exercise-focus { min-height: 32px; padding: 4px 7px; display: inline-flex; align-items: center; gap: 4px; color: var(--muted); font-size: 11px; font-weight: 690; border-radius: 6px; }
+.exercise-speed button[aria-pressed="true"], .exercise-focus[aria-pressed="true"] { background: #dbeafe; color: #1e40af; }
+.exercise-focus { border: 1px solid var(--border); background: var(--surface); border-radius: 8px; }
+.exercise-focus:hover { background: var(--surface-tint); }
+.exercise-form-steps { display: grid; gap: 6px; color: var(--muted); font-size: 11.5px; line-height: 1.4; }
+.exercise-form-steps > div { display: grid; align-items: start; grid-template-columns: 16px 60px minmax(0, 1fr); gap: 5px; }
+.exercise-form-steps strong { color: var(--text); }
+.exercise-form-steps svg { color: var(--green-dark); }
+.exercise-focus-label { margin: 2px 0 0; color: var(--muted); }
+.workout-main.exercise-player-main { grid-template-columns: minmax(0, 1fr) minmax(120px, .34fr); align-items: start; }
+.exercise-demo-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(200px, .8fr); gap: 16px; }
+.exercise-demo-frame { padding: 12px; }
+.exercise-demo-menu label { display: grid; gap: 6px; font-weight: 680; font-size: 12px; }
+.exercise-demo-menu select { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px; font: inherit; color: var(--text); }
+.exercise-demo-menu h3 { margin: 12px 0 3px; font-size: 16px; }
+.exercise-demo-menu .button { margin-top: 9px; }
+.exercise-demo-menu p { color: var(--muted); font-size: 12px; line-height: 1.55; }
+.exercise-stage:not([data-playing="true"]) .exercise-focus-points circle { animation: none; }
+
+@media (max-width: 640px) {
+  .workout-main.exercise-player-main, .exercise-demo-layout { grid-template-columns: minmax(0, 1fr); }
+  .exercise-player-main .timer-panel { margin-top: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .exercise-stage[data-playing="true"] .exercise-focus-points circle { animation: none; }
+}
+:root[data-comfort="true"] .exercise-stage-controls button { min-height: 44px; font-size: 13px; }
+:root[data-comfort="true"] .exercise-form-steps { font-size: 14px; line-height: 1.55; }
+:root[data-comfort="true"] .exercise-form-steps > div { grid-template-columns: 17px 68px minmax(0, 1fr); }
+:root[data-comfort="true"] .exercise-form-steps svg { color: var(--text); }

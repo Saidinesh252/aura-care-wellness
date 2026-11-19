@@ -1,0 +1,56 @@
+.audit-main { padding-bottom: max(112px, calc(100px + env(safe-area-inset-bottom))); }
+.audit-auth { display: grid; gap: 16px; padding: 18px 22px 24px; max-width: 100%; }
+.audit-auth-context { display: flex; gap: 12px; align-items: center; }
+.audit-auth-context > span { display: grid; place-items: center; flex: 0 0 40px; height: 40px; border-radius: 12px; background: var(--green-soft); color: var(--green-dark); }
+.audit-auth p { margin: 0; line-height: 1.55; }
+.audit-auth .form-field { display: grid; gap: 6px; }
+.audit-guest { min-height: 44px; justify-content: center; }
+
+.side-nav > a, .mobile-nav > a { position: relative; isolation: isolate; }
+.side-nav > a[aria-current] { background: transparent; }
+.side-nav .audit-nav-active, .mobile-nav .audit-nav-active { position: absolute; inset: 0; z-index: -1; pointer-events: none; border-radius: inherit; background: var(--green-soft); }
+.sidebar.collapsed .side-nav a .audit-nav-active { display: block; }
+.mobile-nav .audit-nav-active { inset: 3px 0 4px; border-radius: 8px; }
+.recommendation.card, .tracker-card.card, .planning-card.card, .settings-card, .regional-card, .routine-card.card, .meal-card.card, .product-card.card {
+  border-radius: 16px;
+  border-color: color-mix(in srgb, var(--border) 86%, var(--text));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 4%, transparent);
+}
+.ring { transition: none; }
+[data-comfort="true"] .audit-main { font-size: 18px; }
+[data-comfort="true"] .audit-main :where(p, .muted, .fine-print, label, td) { font-size: max(1em, 18px); line-height: 1.58; }
+[data-comfort="true"] :where(.audit-main, dialog, .sidebar, .sticky-context-bar) :where(button, input, select, summary) { min-height: 48px; }
+[data-comfort="true"] :where(.audit-main, dialog, .sidebar) button.icon-button { min-width: 48px; }
+[data-comfort="true"] :where(.audit-main, dialog) :where(.muted, .fine-print) { color: var(--text); }
+:is(.audit-main, dialog, .sidebar, .sticky-context-bar, .avatar-bot-dock) :is(button, a, input, select, summary):focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1023px) {
+  .topbar-inner { gap: 8px; padding-inline: var(--gutter); }
+  .topbar-left-cluster, .header-actions { min-width: 0; }
+  .topbar-inner .header-actions { gap: 5px; }
+  .topbar-inner .profile-summary-details, .topbar-inner .date-chip { display: none; }
+  .mobile-nav { overflow-x: auto; scrollbar-width: none; }
+  .mobile-nav a { flex: 1 0 auto; padding-inline: 7px; }
+}
+@media (max-width: 560px) {
+  .topbar-inner { gap: 4px; padding-inline: 9px; }
+  .topbar-inner .header-actions { gap: 4px; }
+  .topbar-inner .mobile-brand { flex: none; font-size: 15px; gap: 3px; margin-right: auto; }
+  .topbar-inner .mobile-brand > span:last-child { margin-left: -3px; }
+  .topbar-inner :is(.profile-pill-label, .family-circle-trigger > span, .family-circle-chevron, .weather-header-control strong, .topbar-guest-pill > span, .topbar-account-name, .topbar-account-dot) { display: none; }
+  .topbar-inner .header-actions > :is(button, .family-circle) { flex: none; }
+  .topbar-inner .header-actions :is(button, .family-circle-trigger) { min-width: 29px; padding-inline: 5px; gap: 2px; }
+  .topbar-inner .header-actions .icon-button { width: 30px; }
+  .topbar-inner .header-actions .currency-button:not(.weather-header-control) { font-size: 0; }
+  .topbar-inner .header-actions .currency-button:not(.weather-header-control) strong { font-size: 15px; }
+  .topbar-inner .profile-summary-pill { justify-content: center; }
+  .audit-main :is(.section-head, .module-controls) { min-width: 0; flex-wrap: wrap; }
+  .audit-auth { padding-inline: 15px; }
+}
+@media (max-width: 350px) { .topbar-inner .mobile-brand .brand-icon { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .sidebar, .workspace, .avatar-bot-dock, .recommendation.card { animation: none !important; transition: none !important; }
+}

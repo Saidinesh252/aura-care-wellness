@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="auraBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#086045" />
+      <stop offset="50%" stop-color="#0f766e" />
+      <stop offset="100%" stop-color="#064e3b" />
+    </linearGradient>
+    <linearGradient id="auraGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0.3" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- Background squircle -->
+  <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#auraBg)" filter="url(#shadow)" />
+
+  <!-- Outer Aura Ring -->
+  <circle cx="256" cy="256" r="168" fill="none" stroke="url(#auraGlow)" stroke-width="6" stroke-dasharray="16 12" />
+
+  <!-- Inner Aura Glow -->
+  <circle cx="256" cy="256" r="132" fill="#047857" fill-opacity="0.25" stroke="#6ee7b7" stroke-width="2" />
+
+  <!-- Center Bio-Health Cross & Leaf Icon -->
+  <g transform="translate(156, 156) scale(0.39)">
+    <path fill="#ffffff" d="M256,48 C141.1,48 48,141.1 48,256 C48,370.9 141.1,464 256,464 C370.9,464 464,370.9 464,256 C464,141.1 370.9,48 256,48 Z" opacity="0.1" />
+    <!-- Leaf Motifs -->
+    <path fill="#ffffff" d="M256 64 C256 64 360 160 360 260 C360 330 310 380 256 380 C202 380 152 330 152 260 C152 160 256 64 256 64 Z" />
+    <path fill="#086045" d="M256 120 C256 120 270 200 270 256 C270 290 260 320 256 340 C252 320 242 290 242 256 C242 200 256 120 256 120 Z" />
+    <!-- Medical Pulse line -->
+    <path fill="none" stroke="#ffffff" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" d="M96 280 L180 280 L216 210 L256 350 L296 240 L332 280 L416 280" />
+  </g>
+</svg>

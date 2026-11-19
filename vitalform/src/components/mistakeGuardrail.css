@@ -1,0 +1,107 @@
+.mistake-guardrail-banner {
+  margin: 10px 0;
+  border-radius: 14px;
+  background: #fff8f5;
+  border: 1px solid #fed7aa;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+:root[data-theme="dark"] .mistake-guardrail-banner {
+  background: #23140e;
+  border-color: #6c2d12;
+  color: #ffedd5;
+}
+
+.mistake-guardrail-banner.compact {
+  margin: 6px 0;
+  border-radius: 9px;
+  font-size: 11px;
+}
+
+.mistake-guardrail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #ffedd5;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 700;
+  color: #9a3412;
+}
+
+:root[data-theme="dark"] .mistake-guardrail-header {
+  background: #431407;
+  color: #fdba74;
+}
+
+.mistake-guardrail-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mistake-guardrail-body {
+  padding: 10px 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.mistake-guardrail-banner.compact .mistake-guardrail-body {
+  padding: 7px 10px;
+  gap: 6px;
+}
+
+.mistake-guardrail-item {
+  display: grid;
+  gap: 4px;
+}
+
+.mistake-pitfall-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+:root[data-theme="dark"] .mistake-pitfall-row {
+  color: #fca5a5;
+}
+
+.mistake-correction-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: #12633a;
+  font-weight: 600;
+}
+
+:root[data-theme="dark"] .mistake-correction-row {
+  color: #86efac;
+}
+
+.mistake-why-note {
+  margin-left: 20px;
+  font-size: 11px;
+  color: #78350f;
+  background: rgba(254, 215, 170, 0.4);
+  padding: 4px 8px;
+  border-radius: 6px;
+  border-left: 3px solid #f97316;
+}
+
+:root[data-theme="dark"] .mistake-why-note {
+  color: #fed7aa;
+  background: rgba(67, 20, 7, 0.5);
+  border-left-color: #ea580c;
+}
+.mistake-guardrail-body[hidden] { display: none; }
+button.mistake-guardrail-header { border: 0; border-radius: inherit; width: 100%; text-align: left; color: inherit; }
+button.mistake-guardrail-header:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
+.mistake-guardrail-header svg { flex: none; }
+:root[data-comfort="true"] .mistake-guardrail-banner { font-size: 18px; }
+:root[data-comfort="true"] .mistake-guardrail-header { min-height: 48px; }
+:root[data-comfort="true"] .mistake-why-note { font-size: inherit; }

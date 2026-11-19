@@ -1,0 +1,46 @@
+:root[data-comfort="true"] {
+  font-size: 18px;
+  --muted: #3b4941;
+  --subtle: #4b5950;
+  --border: #c5d1c8;
+  --green: #086045;
+}
+:root[data-comfort="true"][data-theme="dark"] {
+  --muted: #d6e4dc;
+  --subtle: #cbd9d1;
+  --border: #53645f;
+  --green: #79e5ae;
+}
+:root[data-comfort="true"] .card { box-shadow: 0 0 0 1px color-mix(in srgb, var(--border), transparent 35%), var(--shadow); }
+:root[data-comfort="true"] :is(.page-intro p, .section-head p, .formula-entry p, .setup-card strong, .tracker-title h3, p, body) { font-size: 18px; line-height: 1.5; }
+:root[data-comfort="true"] :is(.button, .side-nav a, .search-input input, .select-field select, .recovery-action strong, .habit-line, .tracker-action) { font-size: 16px; }
+:root[data-comfort="true"] :is(.button, .side-nav a, .habit-line, .tracker-action, .select-field, .search-input, button, a.button) { min-height: 48px; min-width: 48px; }
+:root[data-comfort="true"] :is(.select-field select, .search-input input) { height: 48px; }
+:root[data-comfort="true"] :is(.recovery-action small, .tracker-metric div:last-child > span, .macro-mini > div > span, .routine-card p, .workout-option > .muted, .cue p) { font-size: 15px; }
+:root[data-comfort="true"] :is(.product-notes, .product-pack, .product-brand, .product-review-row, .fine-print, .grocery-row) { font-size: 15px; }
+:root[data-comfort="true"] :is(button, a, input, select, summary):focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+:root[data-comfort="true"] .habit-line { gap: 8px; }
+:root[data-comfort="true"] .habit-check { width: 22px; height: 22px; }
+.profile-summary-details { max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
+.routine-readout { margin-bottom: 10px; }
+@media (min-width: 1021px) {
+  .planning-section { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1120px) {
+  .profile-summary-details { display: none; }
+}
+@media (max-width: 760px) {
+  .topbar-inner { gap: 5px; }
+  .mobile-nav { gap: 0; }
+  .mobile-nav a span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+  :root[data-comfort="true"] .mobile-nav a { font-size: 11px; }
+}
+@media (max-width: 500px) {
+  .topbar-inner .profile-pill-label { display: none; }
+  .topbar-inner .profile-summary-pill { min-width: 32px; justify-content: center; }
+  .topbar-inner .family-circle-trigger { max-width: 113px; }
+  :root[data-comfort="true"] .tracker-grid { grid-template-columns: 1fr; }
+  :root[data-comfort="true"] .mobile-nav a { font-size: 9px; }
+  :root[data-comfort="true"] .hero-secondary { font-size: 12px; }
+}

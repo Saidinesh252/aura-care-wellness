@@ -1,0 +1,73 @@
+.catalog-hero { margin-bottom: 20px; }
+.catalog-view {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  width: fit-content;
+  padding: 4px;
+  margin-bottom: 15px;
+  background: var(--surface-tint);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+.catalog-view .choice-chip { min-height: 37px; border-color: transparent; gap: 6px; }
+.catalog-view .choice-chip > span { background: var(--surface); border-radius: 12px; padding: 1px 6px; font-size: 10px; }
+.catalog-filters { display: grid; }
+.catalog-filter-controls { justify-content: flex-start; }
+.catalog-filter-controls .search-input { width: 255px; }
+.catalog-filter-controls .select-field { min-width: 145px; }
+.catalog-filter-controls .dorm-filter { min-height: 34px; }
+.catalog-checklist {
+  margin: 13px 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: var(--surface-tint);
+}
+.catalog-checklist > summary { color: var(--green-dark); font-size: 12px; font-weight: 750; cursor: pointer; }
+.catalog-checklist > summary > span { display: inline-flex; gap: 6px; align-items: center; vertical-align: middle; }
+.catalog-checklist > summary > small { color: var(--muted); margin-inline-start: 8px; font-size: 11px; font-weight: 550; }
+.catalog-checklist > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; margin-top: 8px; }
+.catalog-checklist label, .catalog-drawer-checklist label {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: var(--text);
+  padding: 7px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  font-size: 11px;
+  line-height: 1.4;
+}
+.catalog-checklist input, .catalog-drawer-checklist input { width: 14px; height: 14px; min-height: 0; padding: 0; margin: 0; flex: none; accent-color: var(--green-dark); }
+.catalog-count { color: var(--muted); margin: 10px 0 7px; font-size: 11px; }
+.catalog-product-card .product-content { gap: 7px; }
+.catalog-product-card h3 { font-size: 17px; font-weight: 790; line-height: 1.22; letter-spacing: -.038em; }
+.catalog-product-card .product-category { text-align: right; }
+.catalog-product-card .button > svg, .catalog-view svg { flex: none; }
+.catalog-product-card .button:disabled, .drawer-footer .button:disabled { opacity: .72; }
+.catalog-quick-buy { display: grid; gap: 4px; padding: 6px 0; }
+.catalog-quick-buy > div { display: flex; flex-wrap: wrap; gap: 3px 6px; align-items: baseline; justify-content: space-between; font-size: 11px; }
+.catalog-quick-buy small { color: var(--muted); font-size: 10px; }
+.catalog-quick-buy > span { display: flex; flex-wrap: wrap; gap: 4px 6px; }
+.catalog-quick-buy a, .catalog-directions > a { display: inline-flex; align-items: center; gap: 4px; color: var(--green-dark); font-size: 11px; font-weight: 680; }
+.catalog-quick-buy a { border: 1px solid var(--border); border-radius: 6px; padding: 4px 6px; }
+.catalog-quick-buy a:hover, .catalog-directions > a:hover { text-decoration: underline; }
+.catalog-more { display: flex; justify-content: center; margin-top: 13px; }
+.catalog-directions ol { list-style: none; padding: 0; margin: 7px 0; display: grid; gap: 5px; counter-reset: direction; }
+.catalog-directions li { display: flex; align-items: flex-start; gap: 7px; padding: 8px; background: var(--surface-tint); border: 1px solid var(--border); border-radius: 8px; }
+.catalog-directions li::before { counter-increment: direction; content: counter(direction); border-radius: 50%; width: 20px; height: 20px; flex: none; display: grid; place-items: center; background: var(--green-soft); color: var(--green-dark); font-size: 10px; font-weight: 750; }
+.catalog-directions li p { margin: 2px 0 0; color: var(--muted); }
+.catalog-directions > a { margin-right: 9px; margin-top: 5px; }
+.catalog-drawer-checklist h3 { display: flex; align-items: center; gap: 6px; }
+.catalog-drawer-checklist label { margin-top: 5px; }
+.catalog-buy-list { margin-top: 6px; }
+
+@media (max-width: 660px) {
+  .catalog-filter-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+  .catalog-filter-controls .search-input { width: 100%; grid-column: 1 / -1; }
+  .catalog-filter-controls .select-field { min-width: 0; }
+  .catalog-filter-controls .dorm-filter { width: fit-content; }
+  .catalog-checklist > div { grid-template-columns: 1fr; }
+}

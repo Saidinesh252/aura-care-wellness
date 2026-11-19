@@ -1,0 +1,637 @@
+/* Expressive Animated Avatar Bot ("AURA / PIP") & Liquid Glass Chat Drawer */
+
+.avatar-bot-dock {
+  position: fixed;
+  z-index: 60;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, calc(12px + env(safe-area-inset-bottom)));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  pointer-events: none;
+  transition: bottom 0.35s ease, transform 0.35s ease;
+}
+
+.avatar-bot-dock[data-perched='true'] {
+  bottom: 40vh;
+}
+
+/* Floating Trigger Button */
+.avatar-trigger-btn {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 62px;
+  padding: 4px 14px 4px 6px;
+  border-radius: 31px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  border-left: 1px solid rgba(255, 255, 255, 0.28);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(18, 30, 48, 0.88) 100%), rgba(10, 18, 32, 0.92);
+  color: #e6f6ff;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 0 18px rgba(16, 185, 129, 0.22);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.avatar-trigger-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  border-color: #65f3cf;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65), 0 0 24px rgba(101, 243, 207, 0.35);
+}
+
+.avatar-trigger-label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.avatar-trigger-label strong {
+  font: 750 13px/1.1 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.08em;
+  color: #e5fbee;
+}
+
+.avatar-trigger-label small {
+  margin-top: 3px;
+  font: 550 11px/1.2 system-ui, sans-serif;
+  color: #9ebdd8;
+}
+
+/* Speech Bubble Tip */
+.avatar-unread-tip {
+  pointer-events: auto;
+  position: absolute;
+  bottom: calc(100% + 12px);
+  right: 0;
+  width: max-content;
+  max-width: 290px;
+  padding: 6px 6px 6px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(101, 243, 207, 0.45);
+  background: rgba(10, 20, 34, 0.96);
+  backdrop-filter: blur(18px);
+  color: #e4fbee;
+  font: 550 12px/1.35 system-ui, sans-serif;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55), 0 0 15px rgba(16, 185, 129, 0.2);
+  animation: avatar-tip-in 0.28s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar-unread-tip-text {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.avatar-tip-sparkle {
+  color: #65f3cf;
+  flex-shrink: 0;
+}
+
+.avatar-tip-close {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.avatar-tip-close:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
+  color: #fca5a5;
+}
+
+.avatar-unread-tip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 28px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(10, 20, 34, 0.96) transparent transparent transparent;
+}
+
+/* Liquid Glass Chat Drawer / Popover */
+.avatar-chat-drawer {
+  pointer-events: auto;
+  width: min(425px, calc(100vw - 32px));
+  max-height: min(620px, calc(100dvh - 105px));
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 1px solid rgba(255, 255, 255, 0.32);
+  border-left: 1px solid rgba(255, 255, 255, 0.26);
+  background: linear-gradient(150deg, rgba(22, 34, 54, 0.92) 0%, rgba(10, 18, 30, 0.96) 100%);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  overflow: hidden;
+  animation: avatar-drawer-in 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Chat Header */
+.avatar-chat-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.avatar-chat-head-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar-chat-head-titles h2 {
+  margin: 0;
+  font: 750 15px/1.1 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.07em;
+  color: #e5fbee;
+}
+
+.avatar-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 3px;
+  font-size: 11px;
+  color: #9fc1e2;
+}
+
+.avatar-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.avatar-chat-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.avatar-tool-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  color: #c4d9f5;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.15s ease;
+}
+
+.avatar-tool-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #65f3cf;
+  color: #ffffff;
+}
+
+.avatar-tool-btn[data-active='true'] {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #10b981;
+  color: #65f3cf;
+}
+
+/* Style Switcher Bar */
+.avatar-style-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 14px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 11px;
+  color: #92afcf;
+}
+
+.avatar-style-pills {
+  display: flex;
+  gap: 4px;
+}
+
+.avatar-style-pill {
+  padding: 3px 8px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #96b2d2;
+  font: 600 11px/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.avatar-style-pill:hover {
+  color: #ffffff;
+}
+
+.avatar-style-pill[aria-pressed='true'] {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(101, 243, 207, 0.45);
+  color: #65f3cf;
+}
+
+.avatar-perch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 7px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #9bbbdc;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.avatar-perch-btn[data-active='true'] {
+  border-color: #65f3cf;
+  color: #65f3cf;
+}
+
+/* Chat Transcript */
+.avatar-chat-transcript {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 180px;
+  max-height: 330px;
+  scrollbar-width: thin;
+  scrollbar-color: #3b5a7a #0d1a29;
+}
+
+.avatar-msg {
+  display: flex;
+  flex-direction: column;
+  max-width: 88%;
+  gap: 4px;
+}
+
+.avatar-msg-user {
+  align-self: flex-end;
+}
+
+.avatar-msg-bot {
+  align-self: flex-start;
+}
+
+.avatar-msg-bubble {
+  padding: 10px 13px;
+  border-radius: 14px;
+  font: 500 13px/1.5 system-ui, sans-serif;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.avatar-msg-user .avatar-msg-bubble {
+  background: #1f3b5c;
+  border: 1px solid #3d6896;
+  color: #eaf5ff;
+  border-bottom-right-radius: 4px;
+}
+
+.avatar-msg-bot .avatar-msg-bubble {
+  background: rgba(15, 28, 45, 0.85);
+  border: 1px solid rgba(101, 243, 207, 0.28);
+  color: #e2fbe8;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* One-Click Action Chips */
+.avatar-msg-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.avatar-action-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  border-radius: 8px;
+  border: 1px solid rgba(101, 243, 207, 0.45);
+  background: rgba(16, 185, 129, 0.12);
+  color: #65f3cf;
+  font: 620 11.5px/1.2 system-ui, sans-serif;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.avatar-action-chip:hover {
+  background: rgba(16, 185, 129, 0.28);
+  border-color: #a7f3d0;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Smart Starter Prompts Bar */
+.avatar-starters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 6px 14px 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.avatar-starter-pill {
+  padding: 5px 9px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  color: #cbdcf4;
+  font: 530 11px/1.2 system-ui, sans-serif;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.avatar-starter-pill:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: #65f3cf;
+  color: #ffffff;
+}
+
+/* Chat Input Bar */
+.avatar-chat-form {
+  display: grid;
+  grid-template-columns: 36px 1fr 38px;
+  gap: 6px;
+  align-items: center;
+  padding: 10px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 18, 30, 0.95);
+}
+
+.avatar-mic-btn {
+  width: 36px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  color: #adc8e6;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.15s ease;
+}
+
+.avatar-mic-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+.avatar-mic-btn[data-listening='true'] {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
+  color: #fca5a5;
+  animation: avatar-mic-pulse 1.2s infinite;
+}
+
+.avatar-chat-input {
+  min-width: 0;
+  height: 38px;
+  padding: 0 10px;
+  color: #f0f7ff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(6, 12, 22, 0.85);
+  font: 500 14px/1 system-ui, sans-serif;
+}
+
+.avatar-chat-input:focus-visible {
+  outline: 2px solid #65f3cf;
+  outline-offset: 1px;
+}
+
+.avatar-chat-input::placeholder {
+  color: #8aa6c4;
+  font-size: 12px;
+}
+
+.avatar-send-btn {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 8px;
+  border: 1px solid #10b981;
+  background: #10b981;
+  color: #042416;
+  font: 700 18px/1 ui-monospace, monospace;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.avatar-send-btn:hover:not(:disabled) {
+  background: #65f3cf;
+}
+
+.avatar-send-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* Animations */
+@keyframes avatar-tip-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes avatar-drawer-in {
+  from { opacity: 0; transform: scale(0.96) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes avatar-mic-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  50% { transform: scale(1.04); box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+}
+
+/* Avatar State Animations */
+.avatar-renderer {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.avatar-state-idle {
+  animation: avatar-float 3.4s ease-in-out infinite;
+}
+
+.avatar-state-listening {
+  animation: avatar-listen-lean 1.8s ease-in-out infinite;
+}
+
+.avatar-state-celebrating {
+  animation: avatar-celebrate-bounce 0.65s ease-out;
+}
+
+.avatar-confetti-canvas {
+  position: absolute;
+  inset: -12px;
+  width: calc(100% + 24px);
+  height: calc(100% + 24px);
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes avatar-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Waving arm & pulse ring animations */
+.bot-wave-arm {
+  transform-origin: 53px 38px;
+  animation: bot-wave-motion 0.75s ease-in-out infinite alternate;
+}
+
+@keyframes bot-wave-motion {
+  0% { transform: rotate(-8deg); }
+  100% { transform: rotate(18deg); }
+}
+
+.bot-pulse-ring {
+  transform-origin: 32px 32px;
+  animation: bot-pulse-expand 1.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes bot-pulse-expand {
+  0% { transform: scale(0.92); opacity: 0.85; stroke: #10b981; }
+  100% { transform: scale(1.28); opacity: 0; stroke: #65f3cf; }
+}
+
+@keyframes avatar-listen-lean {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1.02); }
+  50% { transform: translateY(-2px) rotate(2deg) scale(1.04); }
+}
+
+@keyframes avatar-celebrate-bounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  25% { transform: translateY(-8px) scale(1.12, 0.92); }
+  50% { transform: translateY(2px) scale(0.94, 1.08); }
+  75% { transform: translateY(-4px) scale(1.04, 0.98); }
+}
+
+.bot-halo-listening {
+  animation: bot-ring-pulse 1.2s infinite;
+}
+
+@keyframes bot-ring-pulse {
+  0%, 100% { stroke-width: 1.6; stroke: #10b981; }
+  50% { stroke-width: 2.6; stroke: #65f3cf; }
+}
+
+.bot-thinking-ring {
+  animation: bot-orbit-spin 2.2s linear infinite;
+  transform-origin: 32px 25px;
+}
+
+@keyframes bot-orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 8-Bit Pip Canvas Elements in Avatar */
+.avatar-pip-wrapper {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  image-rendering: pixelated;
+}
+
+.avatar-pip-body {
+  position: absolute;
+  inset: 0;
+  width: 48px;
+  height: 48px;
+  image-rendering: pixelated;
+}
+
+.avatar-pip-hand {
+  position: absolute;
+  top: 13px;
+  left: 32px;
+  width: 24px;
+  height: 24px;
+  image-rendering: pixelated;
+}
+
+/* Halo Style Orbital Animations */
+.halo-ring-1 {
+  animation: halo-orbit-a 4.8s linear infinite;
+  transform-origin: 32px 32px;
+}
+
+.halo-ring-2 {
+  animation: halo-orbit-b 3.6s linear infinite reverse;
+  transform-origin: 32px 32px;
+}
+
+@keyframes halo-orbit-a {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes halo-orbit-b {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Mobile Responsiveness: Bottom Sheet Drawer */
+@media (max-width: 760px) {
+  .avatar-bot-dock {
+    right: max(14px, env(safe-area-inset-right));
+    bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+  .avatar-bot-dock[data-perched='true'] {
+    bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+  .avatar-chat-drawer {
+    width: min(390px, calc(100vw - 28px));
+    max-height: calc(100dvh - 160px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-bot-dock *, .avatar-renderer {
+    animation: none !important;
+    transition: none !important;
+  }
+}
